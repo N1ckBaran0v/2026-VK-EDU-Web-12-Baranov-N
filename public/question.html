@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AskBaranov - страница вопроса</title>
+    <link rel="icon" href="static/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<nav class="navbar bg-danger ">
+    <div class="container-fluid me-5">
+        <a class="navbar-brand text-white" href = "./index.html" >AskBaranov</a>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-light text-white bg-danger" type="submit">Найти</button>
+        </form>
+        <div class="d-flex justify-content-between gap-3">
+            <div class="d-flex flex-column justify-content-center">
+                <a href="./ask.html" class="btn btn-light text-white bg-danger">Задать вопрос</a>
+            </div>
+            <div class="border">
+                <img src="./static/img/avatar.png" width="48" height="48" alt="avatar"/>
+            </div>
+            <div class="d-flex flex-column justify-content-between align-items-center">
+                <div class="text-white">Red Guy</div>
+                <div>
+                    <a href="./profile.html" class="text-white">Профиль</a>
+                    <a href="./index.html" class="text-white">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container-fluid pb-5">
+    <div class = "row m-3 d-flex gap-3 align-items-start">
+    </div>
+    <div class = "row me-5">
+        <div class="col-12 col-xl-9">
+            <div class="d-flex flex-column gap-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="./static/img/avatar.png" width="64" height="64" alt="avatar" class="rounded"/>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Red Guy</strong>
+                                    <small class="text-muted">5 минут назад</small>
+                                </div>
+                                <h4 class="mb-2">Как правильно организовать структуру проекта на React?</h4>
+                                <p class="mb-3">Только начал изучать React и не могу понять, как лучше разбить проект на компоненты и папки. Поделитесь опытом, как это делаете вы. Интересует и структура для небольших проектов, и для крупных приложений с множеством модулей.</p>
+                                <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                                    <small class="text-muted">Теги:</small>
+                                    <a href="./tag.html" class="text-decoration-none text-primary">react</a>
+                                    <a href="./tag.html" class="text-decoration-none text-secondary">frontend</a>
+                                    <a href="./tag.html" class="text-decoration-none text-success">javascript</a>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold">6</span>
+                                            <div class="d-flex flex-column">
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▲</button>
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▼</button>
+                                            </div>
+                                        </div>
+                                        <span class="text-muted">Ответов: 5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="mb-0">Ответы (5)</h5>
+                <div class="card border-success">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="./static/img/avatar.png" width="48" height="48" alt="avatar" class="rounded"/>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Uncle Sam</strong>
+                                    <span class="badge text-bg-success">Автор отметил этот ответ как правильный</span>
+                                </div>
+                                <p class="mb-3">Для небольших проектов достаточно разбить код на папки components, pages, hooks и utils. Для крупных приложений удобно использовать feature-based структуру: каждая фича — отдельная папка со своими компонентами, хуками, стилями и тестами. Это упрощает навигацию и масштабирование.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold">12</span>
+                                            <div class="d-flex flex-column">
+                                                <button type="button" class="btn btn-sm text-success p-0 lh-1">▲</button>
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▼</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-success">Ответ правильный</button>
+                                    </div>
+                                    <small class="text-muted">3 минуты назад</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="./static/img/avatar.png" width="48" height="48" alt="avatar" class="rounded"/>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Darth Vader</strong>
+                                </div>
+                                <p class="mb-3">Я бы посоветовал начать с официальной документации Create React App — там есть базовые рекомендации. А вообще структура сильно зависит от команды: главное, чтобы все придерживались одних договорённостей.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold">0</span>
+                                            <div class="d-flex flex-column">
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▲</button>
+                                                <button type="button" class="btn btn-sm text-danger p-0 lh-1">▼</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-outline-success">Отметить правильным</button>
+                                    </div>
+                                    <small class="text-muted">4 минуты назад</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-3">
+                            <div class="flex-shrink-0">
+                                <img src="./static/img/avatar.png" width="48" height="48" alt="avatar" class="rounded"/>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Count Dooku</strong>
+                                </div>
+                                <p class="mb-3">Посмотрите в сторону Next.js — там структура папок уже задана фреймворком (app/ или pages/), это сильно экономит время на соглашениях в команде.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-bold">-2</span>
+                                            <div class="d-flex flex-column">
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▲</button>
+                                                <button type="button" class="btn btn-sm text-black p-0 lh-1">▼</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-outline-success">Отметить правильным</button>
+                                    </div>
+                                    <small class="text-muted">4 минуты назад</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Ваш ответ</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="answerText" class="form-label">Текст ответа</label>
+                                <textarea class="form-control" id="answerText" rows="5" placeholder="Напишите ваш ответ..."></textarea>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Вы вошли как Red Guy</small>
+                                <button type="submit" class="btn btn-danger">Отправить ответ</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a class="page-link" href="#">Предыдущая</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Следующая</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-12 col-xl-3">
+            <h3>Популярные теги</h3>
+            <div class="row">
+                <div class="col">
+                    <a href="./tag.html"><span class="badge text-primary">frontend</span></a>
+                    <a href="./tag.html"><span class="badge text-secondary">backend</span></a>
+                    <a href="./tag.html"><span class="badge text-success">devops</span></a>
+                    <a href="./tag.html"><span class="badge text-danger">security</span></a>
+                    <a href="./tag.html"><span class="badge text-warning">testing</span></a>
+                    <a href="./tag.html"><span class="badge text-info">docker</span></a>
+                    <a href="./tag.html"><span class="badge text-primary">kubernetes</span></a>
+                    <a href="./tag.html"><span class="badge text-secondary">postgresql</span></a>
+                    <a href="./tag.html"><span class="badge text-success">mongodb</span></a>
+                    <a href="./tag.html"><span class="badge text-danger">redis</span></a>
+                    <a href="./tag.html"><span class="badge text-warning">graphql</span></a>
+                    <a href="./tag.html"><span class="badge text-info">rest-api</span></a>
+                    <a href="./tag.html"><span class="badge text-primary">microservices</span></a>
+                    <a href="./tag.html"><span class="badge text-secondary">machine-learning</span></a>
+                    <a href="./tag.html"><span class="badge text-success">algorithms</span></a>
+                    <a href="./tag.html"><span class="badge text-danger">git</span></a>
+                    <a href="./tag.html"><span class="badge text-warning">linux</span></a>
+                    <a href="./tag.html"><span class="badge text-info">nginx</span></a>
+                    <a href="./tag.html"><span class="badge text-primary">ci-cd</span></a>
+                    <a href="./tag.html"><span class="badge text-secondary">cloud</span></a>
+                </div>
+            </div>
+            <h3 class="mt-5">Лучшие пользователи</h3>
+            <div>
+                <span class="d-block">Uncle Sam</span>
+                <span class="d-block">Red Guy</span>
+                <span class="d-block">Count Dooku</span>
+                <span class="d-block">S. Holmes</span>
+                <span class="d-block">Darth Vader</span>
+                <span class="d-block">Lara Croft</span>
+                <span class="d-block">Gordon Freeman</span>
+                <span class="d-block">Princess Leia</span>
+                <span class="d-block">W. White</span>
+                <span class="d-block">Tyler Durden</span>
+            </div>
+        </div>
+    </div>
+    <div class = "row m-3 d-flex gap-3 align-items-start">
+    </div>
+</main>
+
+<footer class="fixed-bottom p-3 bg-danger">
+    <div class="container">
+        <span class="text-white"> 2026 </span>
+    </div>
+</footer>
+
+</body>
+</html>
