@@ -25,6 +25,6 @@ cd 2026-VK-EDU-Web-12-Baranov-N
 | `tag`      | `public/tag.html`      | Страница со списком вопросов по тегу       |
 | `question` | `public/question.html` | Страница отдельного вопроса                |
 | `ask`      | `public/ask.html`      | Форма создания вопроса                     |
-| `login`    | `public/login.html`    | Страница входа                             |
-| `signup`   | `public/signup.html`   | Страница регистрации                       |
-| `profile`  | `public/profile.html`  | Страница профиля                           |
+| `login`    | `public/login.html`    | Форма входа                                |
+| `signup`   | `public/signup.html`   | Форма регистрации                          |
+| `profile`  | `public/profile.html`  | Форма профиля                              |
