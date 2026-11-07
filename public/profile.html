@@ -43,18 +43,10 @@
                 <div class="col-12 col-lg-7">
                     <h4 class="mb-3">Настройки профиля</h4>
                     <form>
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <img src="./static/img/avatar.png" width="72" height="72" alt="avatar" class="rounded border"/>
-                            <div>
-                                <label for="profileAvatar" class="form-label mb-1">Аватар</label>
-                                <input class="form-control form-control-sm" type="file" id="profileAvatar" accept="image/*">
-                                <div class="form-text">PNG, JPG или SVG, не более 2 МБ.</div>
-                            </div>
-                        </div>
                         <div class="mb-3">
-                            <label for="profileName" class="form-label">Имя пользователя</label>
-                            <input type="text" class="form-control" id="profileName"
-                                   maxlength="30" value="Red Guy">
+                            <label for="profileLogin" class="form-label">Логин</label>
+                            <input type="text" class="form-control" id="profileLogin"
+                                   maxlength="30" value="red_guy" autocomplete="username">
                         </div>
                         <div class="mb-3">
                             <label for="profileEmail" class="form-label">Email</label>
@@ -63,23 +55,35 @@
                             <div class="form-text">На этот адрес придут уведомления об ответах.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="profileBio" class="form-label">О себе</label>
-                            <textarea class="form-control" id="profileBio" rows="4"
-                                      maxlength="500" placeholder="Пара слов о вас"></textarea>
-                            <div class="form-text">Не более 500 символов.</div>
+                            <label for="profileName" class="form-label">Имя пользователя</label>
+                            <input type="text" class="form-control" id="profileName"
+                                   maxlength="30" value="Red Guy">
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <img src="./static/img/avatar.png" width="72" height="72" alt="avatar" class="rounded border"/>
+                            <div>
+                                <label for="profileAvatar" class="form-label mb-1">Фотография</label>
+                                <input class="form-control form-control-sm" type="file" id="profileAvatar" accept="image/*">
+                                <div class="form-text">PNG, JPG или SVG, не более 2 МБ.</div>
+                            </div>
                         </div>
                         <hr class="my-4">
                         <h6 class="mb-3">Смена пароля</h6>
                         <div class="mb-3">
                             <label for="profileOldPassword" class="form-label">Текущий пароль</label>
                             <input type="password" class="form-control" id="profileOldPassword"
-                                   autocomplete="current-password">
+                                   autocomplete="current-password" placeholder="Введите старый пароль">
                         </div>
                         <div class="mb-3">
                             <label for="profileNewPassword" class="form-label">Новый пароль</label>
                             <input type="password" class="form-control" id="profileNewPassword"
-                                   autocomplete="new-password">
+                                   autocomplete="new-password" placeholder="Введите новый пароль">
                             <div class="form-text">Минимум 8 символов. Оставьте пустым, чтобы не менять пароль.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileNewPasswordRepeat" class="form-label">Повторите новый пароль</label>
+                            <input type="password" class="form-control" id="profileNewPasswordRepeat"
+                                   autocomplete="new-password" placeholder="Введите новый пароль ещё раз">
                         </div>
 
                         <div class="d-flex justify-content-end gap-2">

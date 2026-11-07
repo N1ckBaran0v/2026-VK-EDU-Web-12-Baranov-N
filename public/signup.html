@@ -34,9 +34,9 @@
                     <h4 class="mb-3 text-center">Регистрация</h4>
                     <form>
                         <div class="mb-3">
-                            <label for="signupName" class="form-label">Имя пользователя</label>
-                            <input type="text" class="form-control" id="signupName"
-                                   maxlength="30" placeholder="Как вас называть на сайте">
+                            <label for="signupLogin" class="form-label">Логин</label>
+                            <input type="text" class="form-control" id="signupLogin"
+                                   maxlength="30" placeholder="Придумайте логин" autocomplete="username">
                             <div class="form-text">От 3 до 30 символов.</div>
                         </div>
                         <div class="mb-3">
@@ -46,21 +46,26 @@
                             <div class="invalid-feedback">Вы ввели невалидный email</div>
                         </div>
                         <div class="mb-3">
+                            <label for="signupName" class="form-label">Имя пользователя</label>
+                            <input type="text" class="form-control" id="signupName"
+                                   maxlength="30" placeholder="Как вас называть на сайте">
+                            <div class="form-text">От 3 до 30 символов.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupAvatar" class="form-label">Фотография</label>
+                            <input class="form-control" type="file" id="signupAvatar" accept="image/*">
+                            <div class="form-text">PNG, JPG или SVG, не более 2 МБ.</div>
+                        </div>
+                        <div class="mb-3">
                             <label for="signupPassword" class="form-label">Пароль</label>
                             <input type="password" class="form-control" id="signupPassword"
-                                   autocomplete="new-password">
+                                   autocomplete="new-password" placeholder="Введите пароль">
                             <div class="form-text">Минимум 8 символов, буквы и цифры.</div>
                         </div>
                         <div class="mb-3">
                             <label for="signupPasswordRepeat" class="form-label">Повторите пароль</label>
                             <input type="password" class="form-control" id="signupPasswordRepeat"
-                                   autocomplete="new-password">
-                        </div>
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="agreeTerms">
-                            <label class="form-check-label" for="agreeTerms">
-                                Я согласен с <a href="#" class="text-decoration-none">условиями использования</a>
-                            </label>
+                                   autocomplete="new-password" placeholder="Введите пароль ещё раз">
                         </div>
                         <button type="submit" class="btn btn-danger w-100">Зарегистрироваться</button>
                     </form>
