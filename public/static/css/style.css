@@ -1,0 +1,7 @@
+.navbar .container-fluid {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+}
+.navbar form {
+    margin-right: 1rem;
+}
