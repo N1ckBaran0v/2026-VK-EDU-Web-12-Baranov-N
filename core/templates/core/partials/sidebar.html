@@ -2,9 +2,9 @@
 <div class="row">
     <div class="col">
         {% for tag in popular_tags %}
-            <a href="{% url 'tag' tag.slug %}">
+            <a href="{% url 'tag' tag %}">
                 <span class="badge text-{% cycle 'primary' 'secondary' 'success' 'danger' 'warning' 'info' %}">
-                    {{ tag.name }}
+                    {{ tag }}
                 </span>
             </a>
         {% empty %}

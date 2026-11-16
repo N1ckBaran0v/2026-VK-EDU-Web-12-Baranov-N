@@ -12,12 +12,12 @@
         <div class="d-flex justify-content-between gap-3 align-items-center">
             <a href="{% url 'ask' %}" class="btn btn-light text-white bg-danger">Задать вопрос</a>
 
-            {% if is_authenticated %}
+            {% if user.is_authenticated %}
                 <div class="border">
-                    <img src="{{ avatar_url }}" width="48" height="48" alt="avatar">
+                    <img src="{{ user.avatar_url }}" width="48" height="48" alt="avatar">
                 </div>
                 <div class="d-flex flex-column justify-content-between align-items-center">
-                    <div class="text-white">{{ username }}</div>
+                    <div class="text-white">{{ user.username }}</div>
                     <div>
                         <a href="{% url 'profile' %}" class="text-white">Профиль</a>
                         <a href="{% url 'logout' %}" class="text-white">Выйти</a>
