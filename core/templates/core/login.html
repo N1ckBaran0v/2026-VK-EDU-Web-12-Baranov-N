@@ -1,0 +1,41 @@
+{% extends "core/layout/base.html" %}
+
+{% block title %}Вход - AskBaranov{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-5">
+        <h4 class="mb-3 text-center">Вход</h4>
+
+        {% if error %}
+            <div class="alert alert-danger py-2" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="loginUsername" class="form-label">Логин</label>
+                <input type="text" class="form-control" id="loginUsername" name="username"
+                       placeholder="Введите логин" autocomplete="username"
+                       value="{{ form.username.value|default:'' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="loginPassword" name="password"
+                       placeholder="Введите пароль" autocomplete="current-password" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100 mb-3">Войти</button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            Нет аккаунта?
+            <a href="{% url 'signup' %}" class="text-decoration-none">Зарегистрироваться</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
