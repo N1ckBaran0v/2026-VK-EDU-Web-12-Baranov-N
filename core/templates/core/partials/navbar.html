@@ -1,0 +1,32 @@
+<nav class="navbar bg-danger">
+    <div class="container-fluid me-5">
+        <a class="navbar-brand text-white" href="{% url 'index' %}">AskBaranov</a>
+
+        <form class="d-flex" role="search" action="{% url 'index' %}" method="get">
+            <input class="form-control me-2" type="search" name="q"
+                   placeholder="Search" aria-label="Search"
+                   value="{{ request.GET.q|default:'' }}">
+            <button class="btn btn-light text-white bg-danger" type="submit">Найти</button>
+        </form>
+
+        <div class="d-flex justify-content-between gap-3 align-items-center">
+            <a href="{% url 'ask' %}" class="btn btn-light text-white bg-danger">Задать вопрос</a>
+
+            {% if is_authenticated %}
+                <div class="border">
+                    <img src="{{ avatar_url }}" width="48" height="48" alt="avatar">
+                </div>
+                <div class="d-flex flex-column justify-content-between align-items-center">
+                    <div class="text-white">{{ username }}</div>
+                    <div>
+                        <a href="{% url 'profile' %}" class="text-white">Профиль</a>
+                        <a href="{% url 'logout' %}" class="text-white">Выйти</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="text-white m-1">Войти</a>
+                <a href="{% url 'signup' %}" class="text-white m-1">Зарегистрироваться</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
