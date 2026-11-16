@@ -1,6 +1,8 @@
 {% extends "core/layout/base.html" %}
 
-{% block title %}{{ question.title }} — AskBaranov{% endblock %}
+{% load static %}
+
+{% block title %}{{ question.title }} - AskBaranov{% endblock %}
 
 {% block content %}
 <div class="d-flex flex-column gap-3">
@@ -9,7 +11,7 @@
         <div class="card-body">
             <div class="d-flex gap-3">
                 <div class="flex-shrink-0">
-                    <img src="{{ question.author_avatar_url|default:'' }}" width="64" height="64" alt="avatar" class="rounded">
+                    <img src="{% static question.author_avatar_url %}" width="64" height="64" alt="avatar" class="rounded">
                 </div>
                 <div class="flex-grow-1">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -21,7 +23,7 @@
                     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
                         <small class="text-muted">Теги:</small>
                         {% for tag in question.tags.all %}
-                            <a href="{% url 'tag' tag.slug %}"
+                            <a href="{% url 'tag' tag %}"
                                class="text-decoration-none text-{% cycle 'primary' 'secondary' 'success' 'danger' 'warning' 'info' %}">
                                 {{ tag.name }}
                             </a>
@@ -48,7 +50,7 @@
 
     <h5 class="mb-0">Ответы ({{ question.answers_count }})</h5>
 
-    {% for answer in page_obj %}
+    {% for answer in page_obj.items %}
         {% include "questions/partials/answer_card.html" with answer=answer can_mark_correct=can_mark_correct %}
     {% empty %}
         <p class="text-muted">Ответов пока нет.</p>
@@ -59,8 +61,8 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title mb-3">Ваш ответ</h5>
-            <form method="post" action="{% url 'answer_create' question.id %}">
-                <!-- {% csrf_token %} -->
+            <form method="post" action="{% url 'question' question.id %}">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label for="answerText" class="form-label">Текст ответа</label>
                     <textarea class="form-control {% if errors.text %}is-invalid{% endif %}"

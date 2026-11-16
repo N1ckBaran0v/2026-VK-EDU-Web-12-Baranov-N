@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col">
         {% for tag in popular_tags %}
-            <a href="{% url 'tag' tag %}">
+            <a href="{% url 'tag' tag %}" class="text-decoration-none">
                 <span class="badge text-{% cycle 'primary' 'secondary' 'success' 'danger' 'warning' 'info' %}">
                     {{ tag }}
                 </span>
@@ -16,7 +16,7 @@
 <h3 class="mt-5">Лучшие пользователи</h3>
 <div>
     {% for u in top_users %}
-        <span class="d-block">{{ u.username }}</span>
+        <span class="d-block">{{ u }}</span>
     {% empty %}
         <span class="text-muted">Нет данных</span>
     {% endfor %}

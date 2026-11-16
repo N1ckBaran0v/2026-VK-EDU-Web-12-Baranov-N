@@ -14,7 +14,7 @@
         {% endif %}
 
         <form method="post" action="{% url 'login' %}">
-            <!-- {% csrf_token %} -->
+            {% csrf_token %}
 
             <div class="mb-3">
                 <label for="loginUsername" class="form-label">Логин</label>

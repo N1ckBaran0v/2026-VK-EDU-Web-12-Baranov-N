@@ -1,6 +1,8 @@
 {% extends "core/layout/base.html" %}
 
-{% block title %}Настройки профиля — AskBaranov{% endblock %}
+{% load static %}
+
+{% block title %}Настройки профиля - AskBaranov{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -41,7 +43,7 @@
             </div>
 
             <div class="d-flex align-items-center gap-3 mb-4">
-                <img src="img/{{ profile.avatar_url|default:'' }}" width="72" height="72" alt="avatar" class="rounded border">
+                <img src="{% static profile.avatar_url %}" width="72" height="72" alt="avatar" class="rounded border">
                 <div>
                     <label for="profileAvatar" class="form-label mb-1">Фотография</label>
                     <input class="form-control form-control-sm {% if errors.avatar %}is-invalid{% endif %}"

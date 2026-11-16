@@ -29,7 +29,7 @@ def profile_view(request):
         "login": "red_guy11",
         "username": "Red Guy",
         "email": "red@guy.com",
-        "avatar_url": "avatar.png"
+        "avatar_url": "core/img/avatar.png"
     }
     return render(request, "core/profile.html", data)
 
@@ -44,7 +44,7 @@ def get_data(is_authentificated = False):
         data["user"] = {
             "is_authenticated": True,
             "username": "Red Guy",
-            "avatar_url": "avatar.png"
+            "avatar_url": "core/img/avatar.png"
         }
     else:
         data["user"] = {

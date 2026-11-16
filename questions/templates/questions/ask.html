@@ -1,6 +1,6 @@
 {% extends "core/layout/base.html" %}
 
-{% block title %}Задать вопрос — AskBaranov{% endblock %}
+{% block title %}Задать вопрос - AskBaranov{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -9,7 +9,7 @@
             <h4 class="mb-0">Задать вопрос</h4>
         </div>
         <form method="post" action="{% url 'ask' %}">
-            <!-- {% csrf_token %} -->
+            {% csrf_token %}
 
             <div class="mb-3">
                 <label for="questionTitle" class="form-label">Заголовок вопроса</label>

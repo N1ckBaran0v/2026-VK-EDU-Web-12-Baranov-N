@@ -53,7 +53,7 @@ def get_question(question_id):
         "title": "Как правильно организовать структуру проекта на React?",
         "text": "Только начал изучать React и не могу понять, как лучше разбить проект на компоненты и папки. Поделитесь опытом, как это делаете вы. Интересует и структура для небольших проектов, и для крупных приложений с множеством модулей.",
         "author_name": "Red Guy",
-        "author_avatar_url": "avatar.png",
+        "author_avatar_url": "core/img/avatar.png",
         "created_at_label": "5 минут назад",
         "tags": ["react", "frontend", "javascript"],
         "rating": 6,
@@ -66,7 +66,7 @@ def get_answers():
         {
             "id": 1,
             "author_name": "Uncle Sam",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "text": "Для небольших проектов достаточно разбить код на папки components, pages, hooks и utils. Для крупных приложений удобно использовать feature-based структуру: каждая фича — отдельная папка со своими компонентами, хуками, стилями и тестами. Это упрощает навигацию и масштабирование.",
             "rating": 12,
             "user_vote": 1,
@@ -76,7 +76,7 @@ def get_answers():
         {
             "id": 2,
             "author_name": "Darth Vader",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "text": "Я бы посоветовал начать с официальной документации Create React App — там есть базовые рекомендации. А вообще структура сильно зависит от команды: главное, чтобы все придерживались одних договорённостей.",
             "rating": 0,
             "user_vote": 0,
@@ -86,7 +86,7 @@ def get_answers():
         {
             "id": 3,
             "author_name": "Count Dooku",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "text": "Посмотрите в сторону Next.js — там структура папок уже задана фреймворком (app/ или pages/), это сильно экономит время на соглашениях в команде.",
             "rating": -2,
             "user_vote": -1,
@@ -101,7 +101,7 @@ def get_questions():
             "id": 1,
             "title": "Как правильно организовать структуру проекта на React?",
             "text": "Только начал изучать React и не могу понять, как лучше разбить проект на компоненты и папки. Поделитесь опытом, как это делаете вы.",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "tags": ["react", "frontend", "javascript"],
             "rating": 12,
             "user_vote": 0,
@@ -112,7 +112,7 @@ def get_questions():
             "id": 2,
             "title": "Как передавать данные между компонентами в React?",
             "text": "Не разберусь, когда использовать props, а когда контекст или сторонние стейт-менеджеры. Как выбрать подход?",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "tags": ["react", "frontend"],
             "rating": 6,
             "user_vote": 1,
@@ -123,7 +123,7 @@ def get_questions():
             "id": 3,
             "title": "React useEffect вызывается бесконечно — как исправить?",
             "text": "В useEffect делаю setState, и компонент уходит в бесконечный цикл рендеров. В чём причина и как правильно?",
-            "author_avatar_url": "avatar.png",
+            "author_avatar_url": "core/img/avatar.png",
             "tags": ["react", "javascript"],
             "rating": 8,
             "user_vote": -1,
@@ -141,7 +141,7 @@ def get_data(is_authentificated=False):
         data["user"] = {
             "is_authenticated": True,
             "username": "Red Guy",
-            "avatar_url": "avatar.png",
+            "avatar_url": "core/img/avatar.png",
         }
     else:
         data["user"] = {

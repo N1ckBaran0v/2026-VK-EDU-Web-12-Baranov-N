@@ -1,6 +1,6 @@
 {% extends "core/layout/base.html" %}
 
-{% block title %}Популярные вопросы — AskBaranov{% endblock %}
+{% block title %}Популярные вопросы - AskBaranov{% endblock %}
 
 {% block content %}
 <div class="d-flex flex-column gap-3">
@@ -8,7 +8,7 @@
         <h4 class="mb-0">Популярные вопросы</h4>
     </div>
 
-    {% for question in page_obj %}
+    {% for question in page_obj.items %}
         {% include "questions/partials/question_card.html" with question=question %}
     {% empty %}
         <p class="text-muted">Вопросов пока нет.</p>

@@ -1,3 +1,4 @@
+{% load static %}
 <nav class="navbar bg-danger">
     <div class="container-fluid me-5">
         <a class="navbar-brand text-white" href="{% url 'index' %}">AskBaranov</a>
@@ -14,7 +15,7 @@
 
             {% if user.is_authenticated %}
                 <div class="border">
-                    <img src="img/{{ user.avatar_url }}" width="48" height="48" alt="avatar">
+                    <img src="{% static user.avatar_url %}" width="48" height="48" alt="avatar">
                 </div>
                 <div class="d-flex flex-column justify-content-between align-items-center">
                     <div class="text-white">{{ user.username }}</div>
