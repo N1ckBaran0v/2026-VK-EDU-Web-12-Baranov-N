@@ -14,7 +14,7 @@
 
             {% if user.is_authenticated %}
                 <div class="border">
-                    <img src="{{ user.avatar_url }}" width="48" height="48" alt="avatar">
+                    <img src="img/{{ user.avatar_url }}" width="48" height="48" alt="avatar">
                 </div>
                 <div class="d-flex flex-column justify-content-between align-items-center">
                     <div class="text-white">{{ user.username }}</div>

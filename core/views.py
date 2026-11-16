@@ -17,6 +17,22 @@ def signup_view(request):
     }
     return render(request, "core/signup.html", data)
 
+def profile_view(request):
+    data = get_data(is_authentificated=True)
+    data["errors"] = {
+        "login": ["Некорректный логин"],
+        "username": ["Некорректное имя пользователя"],
+        "email": ["Некорректная почта"],
+        "password": ["Пароли не совпадают"]
+    }
+    data["profile"] = {
+        "login": "red_guy11",
+        "username": "Red Guy",
+        "email": "red@guy.com",
+        "avatar_url": "avatar.png"
+    }
+    return render(request, "core/profile.html", data)
+
 def get_data(is_authentificated = False):
     data = {
         "popular_tags": get_tags(),
