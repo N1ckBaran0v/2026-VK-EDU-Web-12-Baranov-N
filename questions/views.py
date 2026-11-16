@@ -26,6 +26,11 @@ def question_view(request, pk):
     data["errors"] = {}
     return render(request, "questions/question.html", data)
 
+def ask_view(request):
+    data = get_data(is_authentificated=True)
+    data["errors"] = {}
+    return render(request, "questions/ask.html", data)
+
 # Заглушки
 
 def get_page_obj(func):
