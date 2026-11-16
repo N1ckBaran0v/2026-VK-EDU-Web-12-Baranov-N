@@ -1,0 +1,39 @@
+<div class="card {% if answer.is_correct %}border-success{% endif %}">
+    <div class="card-body">
+        <div class="d-flex gap-3">
+            <div class="flex-shrink-0">
+                <img src="{{ answer.author_avatar_url|default:'' }}" width="48" height="48" alt="avatar" class="rounded">
+            </div>
+            <div class="flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong>{{ answer.author_name }}</strong>
+                    {% if answer.is_correct %}
+                        <span class="badge text-bg-success">Автор отметил этот ответ как правильный</span>
+                    {% endif %}
+                </div>
+                <p class="mb-3">{{ answer.text }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="fw-bold">{{ answer.rating }}</span>
+                            <div class="d-flex flex-column">
+                                <button type="button"
+                                        class="btn btn-sm p-0 lh-1 {% if answer.user_vote == 1 %}text-success{% else %}text-black{% endif %}">▲</button>
+                                <button type="button"
+                                        class="btn btn-sm p-0 lh-1 {% if answer.user_vote == -1 %}text-danger{% else %}text-black{% endif %}">▼</button>
+                            </div>
+                        </div>
+                        {% if can_mark_correct %}
+                            {% if answer.is_correct %}
+                                <button type="button" class="btn btn-sm btn-success">Ответ правильный</button>
+                            {% else %}
+                                <button type="button" class="btn btn-sm btn-outline-success">Отметить правильным</button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <small class="text-muted">{{ answer.created_at|timesince }} назад</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

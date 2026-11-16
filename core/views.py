@@ -33,6 +33,8 @@ def profile_view(request):
     }
     return render(request, "core/profile.html", data)
 
+# Заглушки
+
 def get_data(is_authentificated = False):
     data = {
         "popular_tags": get_tags(),
