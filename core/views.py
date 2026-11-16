@@ -7,6 +7,16 @@ def login_view(request):
     data["error"] = "Вы ввели неправильный логин или пароль"
     return render(request, "core/login.html", data)
 
+def signup_view(request):
+    data = get_data()
+    data["errors"] = {
+        "login": ["Некорректный логин"],
+        "username": ["Некорректное имя пользователя"],
+        "email": ["Некорректная почта"],
+        "password": ["Пароли не совпадают"]
+    }
+    return render(request, "core/signup.html", data)
+
 def get_data(is_authentificated = False):
     data = {
         "popular_tags": get_tags(),
