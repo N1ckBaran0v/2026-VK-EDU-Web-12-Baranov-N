@@ -12,15 +12,15 @@ def hot_view(request):
     data["page_obj"] = get_page_obj(get_questions)
     return render(request, "questions/hot.html", data)
 
-def tag_view(request, tag):
+def tag_view(request, tag_name):
     data = get_data(is_authentificated=False)
-    data["tag"] = tag
+    data["tag"] = tag_name
     data["page_obj"] = get_page_obj(get_questions)
     return render(request, "questions/tag.html", data)
 
-def question_view(request, pk):
+def question_view(request, question_id):
     data = get_data(is_authentificated=True)
-    data["question"] = get_question(pk)
+    data["question"] = get_question(question_id)
     data["page_obj"] = get_page_obj(get_answers)
     data["can_mark_correct"] = True
     data["errors"] = {}
@@ -47,9 +47,9 @@ def get_page_obj(func):
         "next_page_number": 2,
     }
 
-def get_question(pk):
+def get_question(question_id):
     return {
-        "id": pk,
+        "id": question_id,
         "title": "Как правильно организовать структуру проекта на React?",
         "text": "Только начал изучать React и не могу понять, как лучше разбить проект на компоненты и папки. Поделитесь опытом, как это делаете вы. Интересует и структура для небольших проектов, и для крупных приложений с множеством модулей.",
         "author_name": "Red Guy",
