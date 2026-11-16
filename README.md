@@ -17,7 +17,7 @@ cd 2026-VK-EDU-Web-12-Baranov-N
 
 ## Запуск сервера
 
-Запустить сервер можно 3 способами: самостоятельно в командной строке, с использованием Dockerfile или через docker compose. В каждом из случаев после запуска сервер будет доступен через браузер по адресу localhost:8000.
+Запустить сервер можно 2 способами: самостоятельно в командной строке или с использованием Docker Compose. В каждом из случаев после запуска сервер будет доступен через браузер по адресу localhost:8000.
 
 ### Запуск в командной строке
 
@@ -37,36 +37,12 @@ pip install --no-cache-dir -r requirements.txt
 python3 manage.py runserver
 ```
 
-### Запуск с использованием Dockerfile
+### Запуск с использованием Docker Compose
 
-Создание образа:
-
-```
-docker build -t django-app .
-```
-
-Запуск контейнера:
+Запуск:
 
 ```
-docker run -d --name django-app -p 8000:8000 django-app
-```
-
-Остановка контейнера:
-
-```
-docker stop django-app
-```
-
-Удаление контейнера:
-
-```
-docker rm django-app
-```
-
-Удаление образа:
-
-```
-docker rmi django-app
+docker compose up --build
 ```
 
 ## Страницы
