@@ -12,7 +12,7 @@ def paginate(objects_list, request, per_page=10):
     except PageNotAnInteger:
         page = paginator.page(1)
     except EmptyPage:
-        page = paginator.page(paginator.num_pages)
+        page = paginator.page(paginator.num_pages if int(page_num) > paginator.num_pages else 1)
     return page
 
 def index_view(request):
