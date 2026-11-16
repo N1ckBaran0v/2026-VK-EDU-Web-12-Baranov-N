@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    {% for question in page_obj.items %}
+    {% for question in page_obj %}
         {% include "questions/partials/question_card.html" with question=question %}
     {% empty %}
         <p class="text-muted">Вопросов с этим тегом пока нет.</p>

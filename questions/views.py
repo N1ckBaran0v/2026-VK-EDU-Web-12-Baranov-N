@@ -1,27 +1,40 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime, timedelta
 
 # Create your views here.
 
+def paginate(objects_list, request, per_page=10):
+    page_num = request.GET.get("page", 1)
+    paginator = Paginator(objects_list, per_page)
+    try:
+        page = paginator.page(page_num)
+    except PageNotAnInteger:
+        page = paginator.page(1)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+    return page
+
 def index_view(request):
     data = get_data(is_authentificated=False)
-    data["page_obj"] = get_page_obj(get_questions)
+    data["page_obj"] = paginate(get_questions(), request, 2)
     return render(request, "questions/index.html", data)
 
 def hot_view(request):
     data = get_data(is_authentificated=False)
-    data["page_obj"] = get_page_obj(get_questions)
+    data["page_obj"] = paginate(get_questions(), request, 2)
     return render(request, "questions/hot.html", data)
 
 def tag_view(request, tag_name):
     data = get_data(is_authentificated=False)
     data["tag"] = tag_name
-    data["page_obj"] = get_page_obj(get_questions)
+    data["page_obj"] = paginate(get_questions(), request, 2)
     return render(request, "questions/tag.html", data)
 
 def question_view(request, question_id):
     data = get_data(is_authentificated=True)
     data["question"] = get_question(question_id)
-    data["page_obj"] = get_page_obj(get_answers)
+    data["page_obj"] = paginate(get_answers(), request, 2)
     data["can_mark_correct"] = True
     data["errors"] = {}
     return render(request, "questions/question.html", data)
@@ -33,20 +46,6 @@ def ask_view(request):
 
 # Заглушки
 
-def get_page_obj(func):
-    return {
-        "items": func(),
-        "paginator": {
-            "num_pages": 2,
-            "page_range": [1, 2],
-        },
-        "number": 1,
-        "has_previous": False,
-        "previous_page_number": 1,
-        "has_next": True,
-        "next_page_number": 2,
-    }
-
 def get_question(question_id):
     return {
         "id": question_id,
@@ -54,7 +53,7 @@ def get_question(question_id):
         "text": "Только начал изучать React и не могу понять, как лучше разбить проект на компоненты и папки. Поделитесь опытом, как это делаете вы. Интересует и структура для небольших проектов, и для крупных приложений с множеством модулей.",
         "author_name": "Red Guy",
         "author_avatar_url": "core/img/avatar.png",
-        "created_at_label": "5 минут назад",
+        "created_at": datetime.now() - timedelta(hours=3),
         "tags": ["react", "frontend", "javascript"],
         "rating": 6,
         "user_vote": 0,
@@ -71,7 +70,7 @@ def get_answers():
             "rating": 12,
             "user_vote": 1,
             "is_correct": True,
-            "created_at_label": "3 минуты назад",
+            "created_at": datetime.now() - timedelta(minutes=5),
         },
         {
             "id": 2,
@@ -81,7 +80,7 @@ def get_answers():
             "rating": 0,
             "user_vote": 0,
             "is_correct": False,
-            "created_at_label": "4 минуты назад",
+            "created_at": datetime.now() - timedelta(minutes=30),
         },
         {
             "id": 3,
@@ -91,7 +90,7 @@ def get_answers():
             "rating": -2,
             "user_vote": -1,
             "is_correct": False,
-            "created_at_label": "4 минуты назад",
+            "created_at": datetime.now() - timedelta(hours=1),
         },
     ]
 
@@ -106,7 +105,7 @@ def get_questions():
             "rating": 12,
             "user_vote": 0,
             "answers_count": 5,
-            "created_at_label": "5 минут назад",
+            "created_at": datetime.now() - timedelta(hours=3),
         },
         {
             "id": 2,
@@ -117,7 +116,7 @@ def get_questions():
             "rating": 6,
             "user_vote": 1,
             "answers_count": 4,
-            "created_at_label": "1 час назад",
+            "created_at": datetime.now() - timedelta(hours=5),
         },
         {
             "id": 3,
@@ -128,7 +127,7 @@ def get_questions():
             "rating": 8,
             "user_vote": -1,
             "answers_count": 3,
-            "created_at_label": "вчера",
+            "created_at": datetime.now() - timedelta(hours=25),
         },
     ]
 

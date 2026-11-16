@@ -50,7 +50,7 @@
 
     <h5 class="mb-0">Ответы ({{ question.answers_count }})</h5>
 
-    {% for answer in page_obj.items %}
+    {% for answer in page_obj %}
         {% include "questions/partials/answer_card.html" with answer=answer can_mark_correct=can_mark_correct %}
     {% empty %}
         <p class="text-muted">Ответов пока нет.</p>
