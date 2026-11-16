@@ -12,6 +12,6 @@ venv/
 pycache/
 *.pyc
 *.sqlite3
-media/
-static/
+/media/
+/static/
 .env
