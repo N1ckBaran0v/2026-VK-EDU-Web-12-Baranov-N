@@ -43,7 +43,7 @@ class LikeModel(models.Model):
     class Meta:
         abstract = True
 
-class QuestionLike(models.Model):
+class QuestionLike(LikeModel):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос")
 
     class Meta:
@@ -51,7 +51,7 @@ class QuestionLike(models.Model):
         verbose_name="Лайк на вопрос"
         verbose_name_plural="Лайки на вопросы"
 
-class AnswerLike(models.Model):
+class AnswerLike(LikeModel):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, verbose_name="Вопрос")
 
     class Meta:
