@@ -5,11 +5,14 @@ from core.models import Profile
 # Create your models here.
 
 class Tag(models.Model):
-    name = models.TextField(verbose_name="Название тега", max_length=20)
+    name = models.TextField(verbose_name="Название тега", max_length=20, unique=True)
 
     class Meta:
         verbose_name="Тег"
         verbose_name_plural="Теги"
+
+    def __str__(self):
+        return f"Тег \"{self.name}\""
 
 class DefaultModel(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, verbose_name="Автор", null=True)
