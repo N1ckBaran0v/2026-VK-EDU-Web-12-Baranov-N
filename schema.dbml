@@ -8,7 +8,7 @@ Table User {
 Table Profile {
     id pk
     user_id FK 
-    name varchar [unique, not null]
+    name varchar [not null]
     avatar varchar 
 }
 
