@@ -17,32 +17,36 @@ cd 2026-VK-EDU-Web-12-Baranov-N
 
 ## Запуск сервера
 
-Запустить сервер можно 2 способами: самостоятельно в командной строке или с использованием Docker Compose. В каждом из случаев после запуска сервер будет доступен через браузер по адресу localhost:8000.
-
-### Запуск в командной строке
-
-Для этого способа у вас должны быть установлены python3.14, и python3.14-venv.
-
-Создание и настройка окружения:
+В первую очередь надо создать .env.docker на основе .env.example. Для этого после скопируйте содержимое .env.example в .env.docker либо вручную, либо командой:
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --no-cache-dir -r requirements.txt
+cp .env.example .env.docker
 ```
 
-Запуск сервера:
+После копирования вручную замените значения параметров. Команда для запуска приложения:
 
 ```
-python3 manage.py runserver
+docker compose up --build -d
 ```
 
-### Запуск с использованием Docker Compose
+После запуска сервер будет доступен в браузере по адресу localhost:8000.
 
-Запуск:
+Миграция (при необходимости):
 
 ```
-docker compose up --build
+docker compose exec web python manage.py migrate
+```
+
+Генерация данных (при необходимости):
+
+```
+docker compose exec web python manage.py fill_db 10000
+```
+
+Остановка сервера:
+
+```
+docker compose down
 ```
 
 ## Страницы

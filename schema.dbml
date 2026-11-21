@@ -32,6 +32,7 @@ Table Answer {
 Table Tag {
     id pk
     name varchar [unique, not null]
+    slug varchar [unique, not null]
 }
 
 Table QuestionLike {

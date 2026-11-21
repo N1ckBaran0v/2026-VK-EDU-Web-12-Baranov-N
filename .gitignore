@@ -15,3 +15,5 @@ pycache/
 /media/
 /static/
 .env
+.env.docker
+.env.local
