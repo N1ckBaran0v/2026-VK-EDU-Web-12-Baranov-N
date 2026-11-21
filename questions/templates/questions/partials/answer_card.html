@@ -7,12 +7,12 @@
             </div>
             <div class="flex-grow-1">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <strong>{{ answer.author_name }}</strong>
+                    <strong>{{ answer.profile.name }}</strong>
                     {% if answer.is_correct %}
                         <span class="badge text-bg-success">Автор отметил этот ответ как правильный</span>
                     {% endif %}
                 </div>
-                <p class="mb-3">{{ answer.text }}</p>
+                <p class="mb-3">{{ answer.content }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center gap-3">
                         <div class="d-flex align-items-center gap-2">

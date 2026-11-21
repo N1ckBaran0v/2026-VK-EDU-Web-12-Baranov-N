@@ -20,6 +20,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ("username", "email", "profile_name",)
     list_select_related = ("profile",)
     search_fields = ("username", "email", "profile__name")
+    list_filter = ("username", "email", "profile__name")
 
     @admin.display(description="Имя в профиле")
     def profile_name(self, obj):
@@ -32,17 +33,8 @@ admin.site.register(User, UserAdmin)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "user", "avatar_preview")
+    list_display = ("id", "name", "user", "avatar_url")
     search_fields = ("name", "user__username", "user__email")
-    list_filter = ("user__is_staff",)
     list_select_related = ("user",)
     raw_id_fields = ("user",)
-    readonly_fields = ("avatar_preview",)
-
-    @admin.display(description="Аватар")
-    def avatar_preview(self, obj):
-        if obj.avatar_url:
-            return format_html(
-                '<img src="{}" style="max-height:50px;" />', obj.avatar_url.url
-            )
-        return "-"
+    ordering = ("pk",)

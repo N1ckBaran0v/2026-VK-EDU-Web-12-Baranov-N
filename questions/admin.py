@@ -5,23 +5,12 @@ from .models import *
 
 # Register your models here.
 
-# ---------- Тег ----------
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "questions_count")
+    list_display = ("id", "name")
     search_fields = ("name",)
-    ordering = ("name",)
+    ordering = ("pk",)
 
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.annotate(_questions_count=Count("question"))
-
-    @admin.display(description="Вопросов", ordering="_questions_count")
-    def questions_count(self, obj):
-        return obj._questions_count
-
-
-# ---------- Inline ответов в вопросе ----------
 class AnswerInline(admin.TabularInline):
     model = Answer
     extra = 0
@@ -31,8 +20,6 @@ class AnswerInline(admin.TabularInline):
     autocomplete_fields = ("profile",)
     show_change_link = True
 
-
-# ---------- Вопрос ----------
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = (
@@ -44,9 +31,10 @@ class QuestionAdmin(admin.ModelAdmin):
     list_select_related = ("profile",)
     raw_id_fields = ("profile",)
     autocomplete_fields = ("profile", "tags")
-    filter_horizontal = ("tags",)   # удобный выбор M2M
+    filter_horizontal = ("tags",)  
     inlines = (AnswerInline,)
     date_hierarchy = "created_at"
+    ordering = ("pk",)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -56,8 +44,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
     @admin.display(description="Теги")
     def tags_list(self, obj):
-        # prefetch_related("tags") — без N+1
-        return ", ".join(t.name for t in obj.tags.all()) or "—"
+        return ", ".join(t.name for t in obj.tags.all()) or "-"
 
     @admin.display(description="Ответов", ordering="_answers_count")
     def answers_count(self, obj):

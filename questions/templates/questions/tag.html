@@ -1,13 +1,13 @@
 {% extends "core/layout/base.html" %}
 
-{% block title %}Вопросы по тегу {{ tag }} - AskBaranov{% endblock %}
+{% block title %}Вопросы по тегу {{ tag.name }} - AskBaranov{% endblock %}
 
 {% block content %}
 <div class="d-flex flex-column gap-3">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-2">
             <h4 class="mb-0">Вопросы по тегу:</h4>
-            <span class="fs-5 text-primary">{{ tag }}</span>
+            <span class="fs-5 text-primary">{{ tag.name }}</span>
         </div>
     </div>
 
