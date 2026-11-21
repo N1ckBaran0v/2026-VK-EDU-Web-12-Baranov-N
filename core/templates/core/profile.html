@@ -1,0 +1,99 @@
+{% extends "core/layout/base.html" %}
+
+{% load static %}
+
+{% block title %}Настройки профиля - AskBaranov{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-7">
+        <h4 class="mb-3">Настройки профиля</h4>
+        <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="profileLogin" class="form-label">Логин</label>
+                <input type="text" class="form-control {% if errors.login %}is-invalid{% endif %}"
+                       id="profileLogin" name="login"
+                       maxlength="30" value="{{ profile.login|default:'' }}" autocomplete="username">
+                {% if errors.login %}
+                    <div class="invalid-feedback">{{ errors.login }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="profileEmail" class="form-label">Email</label>
+                <input type="email" class="form-control {% if errors.email %}is-invalid{% endif %}"
+                       id="profileEmail" name="email"
+                       value="{{ profile.email|default:'' }}" autocomplete="email">
+                {% if errors.email %}
+                    <div class="invalid-feedback">{{ errors.email }}</div>
+                {% endif %}
+                <div class="form-text">На этот адрес придут уведомления об ответах.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="profileName" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-control {% if errors.username %}is-invalid{% endif %}"
+                       id="profileName" name="username"
+                       maxlength="30" value="{{ profile.username|default:'' }}">
+                {% if errors.username %}
+                    <div class="invalid-feedback">{{ errors.username }}</div>
+                {% endif %}
+            </div>
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <img src="{% static profile.avatar_url %}" width="72" height="72" alt="avatar" class="rounded border">
+                <div>
+                    <label for="profileAvatar" class="form-label mb-1">Фотография</label>
+                    <input class="form-control form-control-sm {% if errors.avatar %}is-invalid{% endif %}"
+                           type="file" id="profileAvatar" name="avatar" accept="image/*">
+                    {% if errors.avatar %}
+                        <div class="invalid-feedback">{{ errors.avatar }}</div>
+                    {% endif %}
+                    <div class="form-text">PNG, JPG или SVG, не более 2 МБ.</div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <h6 class="mb-3">Смена пароля</h6>
+
+            <div class="mb-3">
+                <label for="profileOldPassword" class="form-label">Текущий пароль</label>
+                <input type="password" class="form-control {% if errors.old_password %}is-invalid{% endif %}"
+                       id="profileOldPassword" name="old_password"
+                       autocomplete="current-password" placeholder="Введите старый пароль">
+                {% if errors.old_password %}
+                    <div class="invalid-feedback">{{ errors.old_password }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="profileNewPassword" class="form-label">Новый пароль</label>
+                <input type="password" class="form-control {% if errors.new_password %}is-invalid{% endif %}"
+                       id="profileNewPassword" name="new_password"
+                       autocomplete="new-password" placeholder="Введите новый пароль">
+                {% if errors.new_password %}
+                    <div class="invalid-feedback">{{ errors.new_password }}</div>
+                {% endif %}
+                <div class="form-text">Минимум 8 символов. Оставьте пустым, чтобы не менять пароль.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="profileNewPasswordRepeat" class="form-label">Повторите новый пароль</label>
+                <input type="password" class="form-control {% if errors.new_password_repeat %}is-invalid{% endif %}"
+                       id="profileNewPasswordRepeat" name="new_password_repeat"
+                       autocomplete="new-password" placeholder="Введите новый пароль ещё раз">
+                {% if errors.new_password_repeat %}
+                    <div class="invalid-feedback">{{ errors.new_password_repeat }}</div>
+                {% endif %}
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{% url 'index' %}" class="btn btn-outline-secondary">Отмена</a>
+                <button type="submit" class="btn btn-danger">Сохранить изменения</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+Table User {
+    id pk
+    username varchar [unique, not null]
+    password varchar [not null]
+    email varchar [unique]
+}
+
+Table Profile {
+    id pk
+    user_id FK 
+    name varchar [not null]
+    avatar varchar 
+}
+
+Table Question {
+    id pk
+    profile_id FK 
+    title varchar [not null]
+    desciption varchar [not null]
+    created_at datetime [not null]
+}
+
+Table Answer {
+    id pk
+    profile_id FK 
+    question_id FK 
+    content varchar [not null]
+    is_right boolean
+    created_at datetime [not null]
+}
+
+Table Tag {
+    id pk
+    name varchar [unique, not null]
+    slug varchar [unique, not null]
+}
+
+Table QuestionLike {
+    id pk
+    profile_id FK 
+    question_id FK 
+    value integer
+
+    indexes {
+        (profile_id, question_id) [unique, name: 'profile_question_like']
+    }
+}
+
+Table AnswerLike {
+    id pk
+    profile_id FK 
+    answer_id FK 
+    value integer
+
+    indexes {
+        (profile_id, answer_id) [unique, name: 'profile_answer_like']
+    }
+}
+
+Ref: "Profile"."user_id" - "User"."id"
+
+Ref: "Question"."profile_id" > "Profile"."id"
+
+Ref: "Answer"."profile_id" > "Profile"."id"
+
+Ref: "Answer"."question_id" > "Question"."id"
+
+Ref: "Tag"."id" <> "Question"."id"
+
+Ref: "QuestionLike"."profile_id" > "Profile"."id"
+
+Ref: "QuestionLike"."question_id" > "Question"."id"
+
+Ref: "AnswerLike"."profile_id" > "Profile"."id"
+
+Ref: "AnswerLike"."answer_id" > "Answer"."id"

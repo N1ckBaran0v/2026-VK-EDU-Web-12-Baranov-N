@@ -1,0 +1,39 @@
+services:
+    db:
+        image: postgres:17-alpine
+        env_file:
+            - .env.docker
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        networks:
+            - backend
+
+    web:
+        build: .
+        env_file:
+            - .env.docker
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/app
+            - media:/app/media/
+        depends_on:
+            db:
+                condition: service_healthy
+        restart: unless-stopped
+        networks:
+            - backend
+
+volumes:
+    media:
+    postgres_data:
+
+networks:
+    backend:
+        driver: bridge

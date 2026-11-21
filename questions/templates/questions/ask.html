@@ -1,0 +1,56 @@
+{% extends "core/layout/base.html" %}
+
+{% block title %}Задать вопрос - AskBaranov{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Задать вопрос</h4>
+        </div>
+        <form method="post" action="{% url 'ask' %}">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="questionTitle" class="form-label">Заголовок вопроса</label>
+                <input type="text" class="form-control {% if errors.title %}is-invalid{% endif %}"
+                       id="questionTitle" name="title"
+                       maxlength="150" placeholder="Сформулируйте вопрос кратко и понятно">
+                {% if errors.title %}
+                    <div class="invalid-feedback">{{ errors.title }}</div>
+                {% endif %}
+                <div class="form-text">Не более 50 символов. Опишите суть проблемы в заголовке.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="questionText" class="form-label">Описание</label>
+                <textarea class="form-control {% if errors.text %}is-invalid{% endif %}"
+                          id="questionText" name="text" rows="8" maxlength="4000"
+                          placeholder="Опишите проблему подробнее: что вы делали, что получилось, что ожидали..."></textarea>
+                {% if errors.text %}
+                    <div class="invalid-feedback">{{ errors.text }}</div>
+                {% endif %}
+                <div class="d-flex justify-content-between">
+                    <div class="form-text">Максимум 1000 символов</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="questionTags" class="form-label">Теги</label>
+                <input type="text" class="form-control {% if errors.tags %}is-invalid{% endif %}"
+                       id="questionTags" name="tags"
+                       placeholder="Например: react, frontend, javascript">
+                {% if errors.tags %}
+                    <div class="invalid-feedback">{{ errors.tags }}</div>
+                {% endif %}
+                <div class="form-text">Укажите не более 3 тегов через запятую.</div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{% url 'index' %}" class="btn btn-outline-secondary">Отмена</a>
+                <button type="submit" class="btn btn-danger">Опубликовать вопрос</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "core/layout/base.html" %}
+
+{% block title %}Регистрация - AskBaranov{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <h4 class="mb-3 text-center">Регистрация</h4>
+        <form method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="signupLogin" class="form-label">Логин</label>
+                <input type="text" class="form-control {% if errors.login %}is-invalid{% endif %}"
+                       id="signupLogin" name="login"
+                       maxlength="30" placeholder="Придумайте логин" autocomplete="username">
+                {% if errors.login %}
+                    <div class="invalid-feedback">{{ errors.login }}</div>
+                {% endif %}
+                <div class="form-text">От 3 до 30 символов.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="signupEmail" class="form-label">Email</label>
+                <input type="email" class="form-control {% if errors.email %}is-invalid{% endif %}"
+                       id="signupEmail" name="email"
+                       placeholder="you@example.com" autocomplete="email">
+                {% if errors.email %}
+                    <div class="invalid-feedback">{{ errors.email }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="signupName" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-control {% if errors.username %}is-invalid{% endif %}"
+                       id="signupName" name="username"
+                       maxlength="30" placeholder="Как вас называть на сайте">
+                {% if errors.username %}
+                    <div class="invalid-feedback">{{ errors.username }}</div>
+                {% endif %}
+                <div class="form-text">От 3 до 30 символов.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="signupAvatar" class="form-label">Фотография</label>
+                <input class="form-control {% if errors.avatar %}is-invalid{% endif %}"
+                       type="file" id="signupAvatar" name="avatar" accept="image/*">
+                {% if errors.avatar %}
+                    <div class="invalid-feedback">{{ errors.avatar }}</div>
+                {% endif %}
+                <div class="form-text">PNG, JPG или SVG, не более 2 МБ.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="signupPassword" class="form-label">Пароль</label>
+                <input type="password" class="form-control {% if errors.password %}is-invalid{% endif %}"
+                       id="signupPassword" name="password"
+                       autocomplete="new-password" placeholder="Введите пароль">
+                {% if errors.password %}
+                    <div class="invalid-feedback">{{ errors.password }}</div>
+                {% endif %}
+                <div class="form-text">Минимум 8 символов, буквы и цифры.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="signupPasswordRepeat" class="form-label">Повторите пароль</label>
+                <input type="password" class="form-control {% if errors.password_repeat %}is-invalid{% endif %}"
+                       id="signupPasswordRepeat" name="password_repeat"
+                       autocomplete="new-password" placeholder="Введите пароль ещё раз">
+                {% if errors.password_repeat %}
+                    <div class="invalid-feedback">{{ errors.password_repeat }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100">Зарегистрироваться</button>
+        </form>
+        <p class="text-center mt-3 mb-0">
+            Уже есть аккаунт? <a href="{% url 'login' %}" class="text-decoration-none">Войти</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

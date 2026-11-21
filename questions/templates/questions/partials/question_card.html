@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex gap-3">
+            <div class="flex-shrink-0">
+                <img src="{{ question.profile.avatar_url.url }}" width="48" height="48" alt="avatar" class="rounded">
+            </div>
+            <div class="flex-grow-1">
+                <h5 class="mb-2">
+                    <a href="{% url 'question' question.pk %}" class="text-decoration-none">{{ question.title }}</a>
+                </h5>
+                <p class="text-muted mb-2">{{ question.description|truncatewords:30 }}</p>
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                    <small class="text-muted">Теги:</small>
+                    {% for tag in question.tags.all %}
+                        <a href="{% url 'tag' tag.slug %}"
+                           class="text-decoration-none text-{% cycle 'primary' 'secondary' 'success' 'danger' 'warning' 'info' %}">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="fw-bold">{{ question.rating }}</span>
+                            <div class="d-flex flex-column">
+                                <button type="button"
+                                        class="btn btn-sm p-0 lh-1 {% if question.user_vote == 1 %}text-success{% else %}text-black{% endif %}">▲</button>
+                                <button type="button"
+                                        class="btn btn-sm p-0 lh-1 {% if question.user_vote == -1 %}text-danger{% else %}text-black{% endif %}">▼</button>
+                            </div>
+                        </div>
+                        <a href="{% url 'question' question.pk %}" class="text-decoration-none">Ответов: {{ question.answers_count }}</a>
+                    </div>
+                    <small class="text-muted">{{ question.created_at|timesince }} назад</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

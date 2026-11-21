@@ -7,3 +7,13 @@ __pycache__/
 *.sqlite3
 
 ### Dependencies and artifacts ###
+venv/
+.venv/
+pycache/
+*.pyc
+*.sqlite3
+/media/
+/static/
+.env
+.env.docker
+.env.local
