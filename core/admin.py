@@ -36,5 +36,6 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "user", "avatar_url")
     search_fields = ("name", "user__username", "user__email")
     list_select_related = ("user",)
+    list_filter = ("name", "user__username", "user__email")
     raw_id_fields = ("user",)
     ordering = ("pk",)

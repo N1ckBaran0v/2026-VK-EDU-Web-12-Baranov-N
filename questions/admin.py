@@ -7,8 +7,9 @@ from .models import *
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
-    search_fields = ("name",)
+    list_display = ("id", "name", "slug")
+    search_fields = ("name", "slug")
+    list_filter = ("name", "slug")
     ordering = ("pk",)
 
 class AnswerInline(admin.TabularInline):
@@ -50,8 +51,6 @@ class QuestionAdmin(admin.ModelAdmin):
     def answers_count(self, obj):
         return obj._answers_count
 
-
-# ---------- Ответ ----------
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = (
@@ -64,13 +63,12 @@ class AnswerAdmin(admin.ModelAdmin):
     raw_id_fields = ("question", "profile")
     autocomplete_fields = ("question", "profile")
     date_hierarchy = "created_at"
+    ordering = ("pk",)
 
     @admin.display(description="Текст ответа")
     def short_content(self, obj):
         return obj.content[:60] + ("…" if len(obj.content) > 60 else "")
 
-
-# ---------- Лайк на вопрос ----------
 @admin.register(QuestionLike)
 class QuestionLikeAdmin(admin.ModelAdmin):
     list_display = ("id", "question", "profile", "value", "value_label")
@@ -79,13 +77,12 @@ class QuestionLikeAdmin(admin.ModelAdmin):
     list_select_related = ("question", "profile")
     raw_id_fields = ("question", "profile")
     autocomplete_fields = ("question", "profile")
+    ordering = ("pk",)
 
     @admin.display(description="Тип")
     def value_label(self, obj):
         return "Лайк" if obj.value == 1 else "Дизлайк"
 
-
-# ---------- Лайк на ответ ----------
 @admin.register(AnswerLike)
 class AnswerLikeAdmin(admin.ModelAdmin):
     list_display = ("id", "answer", "profile", "value", "value_label")
@@ -94,6 +91,7 @@ class AnswerLikeAdmin(admin.ModelAdmin):
     list_select_related = ("answer", "profile")
     raw_id_fields = ("answer", "profile")
     autocomplete_fields = ("answer", "profile")
+    ordering = ("pk",)
 
     @admin.display(description="Тип")
     def value_label(self, obj):

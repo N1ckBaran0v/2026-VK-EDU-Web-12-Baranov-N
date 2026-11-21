@@ -1,7 +1,5 @@
 {% extends "core/layout/base.html" %}
 
-{% load static %}
-
 {% block title %}{{ question.title }} - AskBaranov{% endblock %}
 
 {% block content %}
@@ -11,7 +9,7 @@
         <div class="card-body">
             <div class="d-flex gap-3">
                 <div class="flex-shrink-0">
-                    <img src="{% static question.profile.avatar_url %}" width="64" height="64" alt="avatar" class="rounded">
+                    <img src="{{ question.profile.avatar_url.url }}" width="64" height="64" alt="avatar" class="rounded">
                 </div>
                 <div class="flex-grow-1">
                     <div class="d-flex justify-content-between align-items-center mb-2">

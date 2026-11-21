@@ -66,7 +66,7 @@ class Command(BaseCommand):
             Profile(
                 user_id=u.pk,
                 name=fake.name()[:150],
-                avatar_url="core/img/avatar.png"
+                avatar_url="avatars/avatar.png"
             )
             for u in users
         ]

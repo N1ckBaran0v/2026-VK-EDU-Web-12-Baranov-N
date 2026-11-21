@@ -17,8 +17,8 @@ class Tag(models.Model):
         return f"{self.name}"
 
 class DefaultModel(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, verbose_name="Автор", null=True)
-    created_at = models.DateTimeField(verbose_name="Время создания", auto_now_add=True)
+    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, verbose_name="автор", null=True)
+    created_at = models.DateTimeField(verbose_name="время создания", auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -40,9 +40,9 @@ class QuestionManager(models.Manager):
         return self.get_queryset().filter(tags__slug=tag).order_by("-created_at")
 
 class Question(DefaultModel):
-    title = models.TextField(verbose_name="Заголовок вопроса", max_length=50)
-    description = models.TextField(verbose_name="Описание вопроса", max_length=1000)
-    tags = models.ManyToManyField(Tag, verbose_name="Теги", blank=True)
+    title = models.TextField(verbose_name="заголовок вопроса", max_length=50)
+    description = models.TextField(verbose_name="описание вопроса", max_length=1000)
+    tags = models.ManyToManyField(Tag, verbose_name="теги", blank=True)
 
     objects = QuestionManager()
 
@@ -60,9 +60,9 @@ class AnswerManager(models.Manager):
         ).select_related("profile").order_by("-rating", "-created_at");
 
 class Answer(DefaultModel):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос")
-    content = models.TextField(verbose_name="Текст ответа", max_length=1000)
-    is_correct = models.BooleanField(verbose_name="Ответ правильный")
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="вопрос")
+    content = models.TextField(verbose_name="текст ответа", max_length=1000)
+    is_correct = models.BooleanField(verbose_name="ответ правильный")
 
     objects = AnswerManager()
 
@@ -74,14 +74,14 @@ class Answer(DefaultModel):
         return f"Ответ {self.pk} от {self.profile.name}"
 
 class LikeModel(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, verbose_name="Автор", null=True)
-    value = models.IntegerField(verbose_name="Значение", choices=[(1, "Лайк"), (-1, "Дизлайк")], default = 1)
+    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, verbose_name="автор", null=True)
+    value = models.IntegerField(verbose_name="значение", choices=[(1, "лайк"), (-1, "дизлайк")], default = 1)
     
     class Meta:
         abstract = True
 
 class QuestionLike(LikeModel):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос")
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="вопрос")
 
     class Meta:
         constraints = [models.UniqueConstraint(name="user_question_like", fields=["profile", "question"])]
@@ -92,7 +92,7 @@ class QuestionLike(LikeModel):
         return f"Реакция от {self.profile.name} на вопрос от {self.question.profile.name}"
 
 class AnswerLike(LikeModel):
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, verbose_name="Вопрос")
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, verbose_name="ответ")
 
     class Meta:
         constraints = [models.UniqueConstraint(name="user_answer_like", fields=["profile", "answer"])]
