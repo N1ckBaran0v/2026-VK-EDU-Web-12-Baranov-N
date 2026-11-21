@@ -34,7 +34,7 @@ class QuestionManager(models.Manager):
         return self.get_queryset().order_by("-created_at")
 
     def get_hot(self):
-        return self.get_queryset().order_by("-rating").order_by("-created_at")
+        return self.get_queryset().order_by("-rating", "-created_at")
 
     def get_by_tag(self, tag):
         return self.get_queryset().filter(tags__slug=tag).order_by("-created_at")
@@ -57,7 +57,7 @@ class AnswerManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().annotate(
             rating=Sum("answerlike__value", default=0)
-        ).select_related("profile").order_by("-rating").order_by("-created_at");
+        ).select_related("profile").order_by("-rating", "-created_at");
 
 class Answer(DefaultModel):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос")

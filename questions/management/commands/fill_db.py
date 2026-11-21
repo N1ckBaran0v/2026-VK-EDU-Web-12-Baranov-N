@@ -3,7 +3,6 @@ from datetime import timedelta
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from django.db import transaction
 from django.utils import timezone
 
 from faker import Faker
@@ -45,12 +44,8 @@ class Command(BaseCommand):
             f"answers={num_answers}, tags={num_tags}, likes={num_likes}"
         ))
 
-        # ------------------------------------------------------------------
-        # 1. Пользователи + профили
-        # ------------------------------------------------------------------
+        # Профили и пользователи
         self.stdout.write("Создание пользователей и профилей...")
-
-        # Генерируем уникальные username/email заранее, чтобы избежать коллизий
         existing_usernames = set(
             User.objects.values_list("username", flat=True)
         )
@@ -66,29 +61,24 @@ class Command(BaseCommand):
             User(username=u, email=e)
             for u, e in zip(usernames, emails)
         ]
-        # bulk_create возвращает объекты с заполненными pk (на PostgreSQL / SQLite 3.35+)
         users = User.objects.bulk_create(users, batch_size=BATCH_SIZE)
-
-        # Профили
         profiles = [
             Profile(
                 user_id=u.pk,
                 name=fake.name()[:150],
+                avatar_url="core/img/avatar.png"
             )
             for u in users
         ]
         profiles = Profile.objects.bulk_create(profiles, batch_size=BATCH_SIZE)
         profile_ids = [p.pk for p in profiles]
 
-        # ------------------------------------------------------------------
-        # 2. Теги
-        # ------------------------------------------------------------------
+        # Теги
         self.stdout.write("Создание тегов...")
 
         existing_tags = set(Tag.objects.values_list("name", flat=True))
         tag_names = set()
         while len(tag_names) < num_tags:
-            # короткие "слова" как названия тегов (max_length=20)
             tag_names.add(fake.word()[:20] + str(random.randint(0, 999)))
         tag_names -= existing_tags
         tag_names = list(tag_names)[:num_tags]
@@ -97,9 +87,7 @@ class Command(BaseCommand):
         tags = Tag.objects.bulk_create(tags, batch_size=BATCH_SIZE)
         tag_ids = [t.pk for t in tags]
 
-        # ------------------------------------------------------------------
-        # 3. Вопросы + связи M2M с тегами через through-таблицу
-        # ------------------------------------------------------------------
+        # Вопросы
         self.stdout.write("Создание вопросов...")
 
         now = timezone.now()
@@ -117,25 +105,18 @@ class Command(BaseCommand):
         ]
         questions = Question.objects.bulk_create(questions, batch_size=BATCH_SIZE)
         question_ids = [q.pk for q in questions]
-
-        # M2M через through-таблицу (Question.tags.through)
         QuestionTag = Question.tags.through
         through_rows = []
         for qid in question_ids:
-            # каждому вопросу 1-3 случайных тега
             n_tags = random.randint(1, 3)
             for tid in random.sample(tag_ids, min(n_tags, len(tag_ids))):
                 through_rows.append(QuestionTag(question_id=qid, tag_id=tid))
-
-        # bulk_create для M2M
         for i in range(0, len(through_rows), BATCH_SIZE):
             QuestionTag.objects.bulk_create(
                 through_rows[i:i + BATCH_SIZE], batch_size=BATCH_SIZE, ignore_conflicts=True
             )
 
-        # ------------------------------------------------------------------
-        # 4. Ответы
-        # ------------------------------------------------------------------
+        # Ответы
         self.stdout.write("Создание ответов...")
 
         answers = [
@@ -154,17 +135,12 @@ class Command(BaseCommand):
         answers = Answer.objects.bulk_create(answers, batch_size=BATCH_SIZE)
         answer_ids = [a.pk for a in answers]
 
-        # ------------------------------------------------------------------
-        # 5. Лайки пользователей (QuestionLike + AnswerLike)
-        # ------------------------------------------------------------------
+        # Лайки пользователей (QuestionLike + AnswerLike)
         self.stdout.write("Создание оценок пользователей...")
-
-        # Делим общее количество лайков примерно поровну
         n_q_likes = num_likes // 2
         n_a_likes = num_likes - n_q_likes
 
-        # ---- QuestionLike ----
-        # Уникальный constraint (profile, question) — избегаем дублей
+        # QuestionLike
         seen_q = set()
         q_like_rows = []
         attempts = 0
@@ -190,7 +166,7 @@ class Command(BaseCommand):
                 ignore_conflicts=True,
             )
 
-        # ---- AnswerLike ----
+        # AnswerLike
         seen_a = set()
         a_like_rows = []
         attempts = 0

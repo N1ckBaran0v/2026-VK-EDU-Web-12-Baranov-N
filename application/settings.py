@@ -119,8 +119,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    'media',
+    BASE_DIR / 'static'
 ]
 
 # Email
@@ -131,3 +130,7 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# Media
+
+MEDIA_ROOT = BASE_DIR / 'media'
